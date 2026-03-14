@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alok Yadav</title> — Founder & CEO, Azeel Technologies</title>
+<meta name="description" content="Alok yadav — Founder & CEO of Azeel Technologies. AI automation, web development, and digital solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* RESET & BASE  */
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box }
+html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale }
+img { display:block; max-width:100%; }
+a { text-decoration:none; color:inherit }
+button { border:none; background:none; font-family:inherit; cursor:pointer }
+
+/*  DESIGN SYSTEM */
+
+:root {
+  /* Backgrounds — deep charcoal ink */
+  --ink:          #08090d;
+  --ink-1:        #0e1018;
+  --ink-2:        #131620;
+  --ink-3:        #181c28;
+  --ink-card:     #111420;
+  --ink-card-h:   #161a2a;
+
+  /* Gold — warm antique */
+  --au:           #b8966a;
+  --au-lt:        #d4b080;
+  --au-pale:      #e8cfa0;
+  --au-dim:       rgba(184,150,106,.12);
+  --au-border:    rgba(184,150,106,.20);
+  --au-glow:      rgba(184,150,106,.08);
+
+  /* Text hierarchy */
+  --t1:           #eeeae2;
+  --t2:           rgba(238,234,226,.70);
+  --t3:           rgba(238,234,226,.42);
+  --t4:           rgba(238,234,226,.22);
+
+  /* Borders */
+  --b1:           rgba(255,255,255,.06);
+  --b2:           rgba(255,255,255,.10);
+
+  /* Fonts */
+  --display:      'Cormorant', Georgia, serif;
+  --body:         'Jost', system-ui, sans-serif;
+  --serif:        'EB Garamond', Georgia, serif;
+
+  /* Spacing */
+  --sp:    8rem;
+  --r:     8px;
+  --rl:    14px;
+}
+
+body {
+  font-family: var(--body);
+  background: var(--ink);
+  color: var(--t1);
+  overflow-x: hidden;
+  line-height: 1.65;
+}
+
+/*  SCROLLBAR */
+::-webkit-scrollbar { width: 4px }
+::-webkit-scrollbar-track { background: var(--ink) }
+::-webkit-scrollbar-thumb { background: var(--au); border-radius: 2px }
+
+/*  SCROLL PROGRESS */
+#prog {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--au), var(--au-lt));
+  z-index: 9999; transition: width .08s linear;
+}
+
+/* PRELOADER */
+#preloader {
+  position: fixed; inset: 0; background: var(--ink); z-index: 8000;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 2.5rem;
+  transition: opacity .8s cubic-bezier(.4,0,.2,1), visibility .8s;
+}
+#preloader.done { opacity: 0; visibility: hidden; pointer-events: none }
+
+.pre-logo {
+  font-family: var(--display);
+  font-size: 2.4rem; font-weight: 300; letter-spacing: .06em;
+  color: var(--t1);
+  animation: fadeUp .8s ease .2s both;
+}
+.pre-logo span { color: var(--au); font-style: italic }
+
+.pre-bar {
+  width: 200px; height: 1px;
+  background: var(--b1); overflow: hidden;
+  animation: fadeUp .8s ease .4s both;
+}
+.pre-fill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--au), var(--au-lt));
+  animation: barFill 3.6s cubic-bezier(.4,0,.2,1) .6s forwards;
+}
+@keyframes barFill { to { width: 100% } }
+
+.pre-label {
+  font-size: .65rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--t4); font-weight: 400;
+  animation: fadeUp .8s ease .6s both;
+}
+
+/* KEYFRAMES  */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px) }
+  to   { opacity:1; transform: translateY(0) }
+}
+@keyframes fadeIn {
+  from { opacity:0 }
+  to   { opacity:1 }
+}
+@keyframes imgShow {
+  from { opacity:0; transform: scale(1.04) }
+  to   { opacity:1; transform: scale(1) }
+}
+@keyframes lineGrow {
+  from { transform: scaleX(0); transform-origin: left }
+  to   { transform: scaleX(1); transform-origin: left }
+}
+@keyframes dotPulse {
+  0%,100% { opacity:1; transform:scale(1) }
+  50%     { opacity:.4; transform:scale(.6) }
+}
+@keyframes arrowBob {
+  0%,100% { transform: translateY(0) }
+  50%     { transform: translateY(6px) }
+}
+
+/*  NAVIGATION */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  padding: 1.6rem 0;
+  transition: padding .5s ease, background .5s ease, border-color .5s ease;
+  border-bottom: 1px solid transparent;
+}
+nav.stuck {
+  background: rgba(8,9,13,.93);
+  backdrop-filter: blur(28px) saturate(1.5);
+  padding: 1rem 0;
+  border-bottom-color: var(--b1);
+}
+.nav-inner {
+  max-width: 1260px; margin: 0 auto; padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--display);
+  font-size: 1.5rem; font-weight: 400; letter-spacing: .04em;
+  color: var(--t1); cursor: pointer;
+  transition: color .3s;
+}
+.nav-logo em { color: var(--au); font-style: italic }
+.nav-logo:hover { color: var(--au) }
+
+.nav-menu { display: flex; align-items: center; gap: 2.8rem }
+.nav-link {
+  font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+  font-weight: 500; color: var(--t3); cursor: pointer;
+  transition: color .3s; position: relative; padding-bottom: 3px;
+}
+.nav-link::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  height: 1px; width: 0; background: var(--au);
+  transition: width .35s ease;
+}
+.nav-link:hover { color: var(--t1) }
+.nav-link:hover::after { width: 100% }
+
+.nav-cta {
+  padding: .52rem 1.5rem;
+  border: 1px solid var(--au-border); border-radius: var(--r);
+  font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+  font-weight: 600; color: var(--au);
+  transition: all .35s cubic-bezier(.4,0,.2,1);
+}
+.nav-cta:hover {
+  background: var(--au); color: var(--ink);
+  border-color: var(--au);
+  box-shadow: 0 8px 32px rgba(184,150,106,.22);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 52% 48%;
+  position: relative; overflow: hidden;
+}
+
+/* Ambient gradient */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 75% 65% at 12% 55%, rgba(20,38,80,.40) 0%, transparent 68%),
+    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(184,150,106,.07) 0%, transparent 60%);
+}
+
+/* Left column */
+.hero-l {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 9rem 4.5rem 5rem 2.5rem;
+  max-width: 700px; margin-left: auto;
+}
+
+/* Staggered hero entry — all delayed after loader */
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 2.4rem;
+  opacity: 0; animation: fadeUp .75s ease 5.0s forwards;
+}
+.hero-eyebrow-line {
+  width: 28px; height: 1px; background: var(--au); opacity: .8;
+}
+.hero-eyebrow-text {
+  font-size: .65rem; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--au); font-weight: 500;
+}
+
+.hero-name {
+  font-family: var(--display);
+  font-size: clamp(3.8rem, 5.8vw, 6.8rem);
+  font-weight: 300; line-height: .92; letter-spacing: -.01em;
+  color: var(--t1);
+  opacity: 0; animation: fadeUp .95s cubic-bezier(.22,1,.36,1) 5.25s forwards;
+}
+.hero-name em { display: block; color: var(--au); font-style: italic; font-weight: 400 }
+
+.hero-role {
+  margin-top: 1.8rem;
+  font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+  font-weight: 500; color: var(--t4);
+  opacity: 0; animation: fadeUp .75s ease 5.6s forwards;
+}
+
+.hero-desc {
+  margin-top: 2rem; max-width: 430px;
+  font-size: 1.02rem; line-height: 1.9; font-weight: 300; color: var(--t3);
+  opacity: 0; animation: fadeUp .75s ease 5.85s forwards;
+}
+
+.hero-actions {
+  display: flex; gap: 1rem; margin-top: 3rem;
+  opacity: 0; animation: fadeUp .75s ease 6.1s forwards;
+}
+.btn-au {
+  padding: .8rem 2rem;
+  background: var(--au); color: var(--ink); border-radius: var(--r);
+  font-size: .73rem; letter-spacing: .16em; text-transform: uppercase;
+  font-weight: 600; border: 1px solid var(--au);
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+}
+.btn-au:hover {
+  background: var(--au-lt); border-color: var(--au-lt);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(184,150,106,.28);
+}
+.btn-ghost {
+  padding: .8rem 2rem;
+  background: transparent; color: var(--t2); border-radius: var(--r);
+  font-size: .73rem; letter-spacing: .16em; text-transform: uppercase;
+  font-weight: 600; border: 1px solid var(--b2);
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+}
+.btn-ghost:hover {
+  border-color: var(--au-border); color: var(--au);
+  transform: translateY(-3px);
+}
+
+.hero-stats {
+  display: flex; gap: 3rem; margin-top: 4.2rem;
+  padding-top: 2.5rem; border-top: 1px solid var(--b1);
+  opacity: 0; animation: fadeUp .75s ease 6.4s forwards;
+}
+.stat-val {
+  font-family: var(--display);
+  font-size: 2.8rem; font-weight: 500; line-height: 1;
+  color: var(--t1); letter-spacing: -.02em;
+}
+.stat-lbl {
+  font-size: .63rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t4); margin-top: .45rem; font-weight: 400;
+}
+
+/* Right column — portrait */
+.hero-r {
+  position: relative; overflow: hidden;
+}
+.hero-img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  opacity: 0; filter: grayscale(12%) contrast(1.05);
+  animation: imgShow 1.6s ease 5.4s forwards;
+}
+.hero-img-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to right, var(--ink) 0%, transparent 28%,
+    transparent 70%, rgba(8,9,13,.35) 100%
+  );
+}
+.hero-img-fade {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--ink) 0%, transparent 45%);
+}
+
+.hero-badge {
+  position: absolute; bottom: 2.8rem; right: 2rem;
+  background: rgba(14,16,24,.92); backdrop-filter: blur(24px);
+  border: 1px solid var(--au-border); border-radius: var(--r);
+  padding: .85rem 1.3rem;
+  display: flex; align-items: center; gap: .7rem;
+  opacity: 0; animation: fadeUp .7s ease 7s forwards;
+}
+.badge-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--au); flex-shrink: 0;
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+.badge-txt {
+  font-size: .67rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--t2); font-weight: 500;
+}
+
+/* Scroll indicator */
+.scroll-ind {
+  position: absolute; bottom: 2.8rem; left: 2.5rem; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  opacity: 0; animation: fadeIn 1s ease 7.2s forwards;
+}
+.scroll-line {
+  width: 1px; height: 42px;
+  background: linear-gradient(to bottom, var(--au), transparent);
+  animation: arrowBob 2s ease-in-out infinite;
+}
+.scroll-txt {
+  font-size: .57rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--t4); writing-mode: vertical-rl;
+}
+
+/*  SECTION SHELL */
+.sec { padding: var(--sp) 0; position: relative }
+.sec--alt { background: var(--ink-1) }
+.sec--deep { background: var(--ink-2) }
+
+.wrap { max-width: 1260px; margin: 0 auto; padding: 0 2.5rem }
+
+.sec-label {
+  display: flex; align-items: center; gap: 1.3rem;
+  margin-bottom: 4.5rem;
+}
+.sec-num {
+  font-size: .62rem; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--au); font-weight: 500; white-space: nowrap;
+}
+.sec-rule {
+  height: 1px; flex: 1;
+  background: linear-gradient(90deg, var(--au-border), transparent);
+}
+
+.sec-title {
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 4.2vw, 4.4rem);
+  font-weight: 300; line-height: 1.08; letter-spacing: -.015em;
+  color: var(--t1);
+}
+.sec-title em { font-style: italic; color: var(--au); font-weight: 400 }
+
+/*  SCROLL REVEAL */
+.rv {
+  opacity: 0; transform: translateY(50px);
+  transition: opacity .9s cubic-bezier(.22,1,.36,1),
+              transform .9s cubic-bezier(.22,1,.36,1);
+}
+.rv.on { opacity: 1; transform: translateY(0) }
+
+.rv-l {
+  opacity: 0; transform: translateX(-52px);
+  transition: opacity 1s cubic-bezier(.22,1,.36,1),
+              transform 1s cubic-bezier(.22,1,.36,1);
+}
+.rv-l.on { opacity: 1; transform: translateX(0) }
+
+.rv-r {
+  opacity: 0; transform: translateX(52px);
+  transition: opacity 1s cubic-bezier(.22,1,.36,1),
+              transform 1s cubic-bezier(.22,1,.36,1);
+}
+.rv-r.on { opacity: 1; transform: translateX(0) }
+
+.d1{transition-delay:.05s} .d2{transition-delay:.14s} .d3{transition-delay:.23s}
+.d4{transition-delay:.32s} .d5{transition-delay:.41s} .d6{transition-delay:.50s}
+
+/*about */
+.about-grid {
+  display: grid; grid-template-columns: 320px 1fr;
+  gap: 6.5rem; align-items: start;
+}
+.about-aside { position: sticky; top: 7rem }
+.about-portrait {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover; object-position: top;
+  border-radius: var(--rl);
+  border: 1px solid var(--b1);
+  filter: grayscale(8%);
+  transition: filter .6s ease, transform .6s ease;
+}
+.about-portrait:hover { filter: grayscale(0%); transform: scale(1.015) }
+.about-caption {
+  margin-top: 1rem; text-align: center;
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--t4);
+}
+
+.about-pull {
+  border-left: 2px solid var(--au);
+  padding-left: 1.6rem; margin: 2.6rem 0;
+}
+.about-pull p {
+  font-family: var(--serif);
+  font-size: 1.3rem; font-weight: 400; font-style: italic;
+  color: var(--t2); line-height: 1.68;
+}
+.about-body h3 {
+  font-family: var(--display);
+  font-size: 1.65rem; font-weight: 400; color: var(--t1);
+  margin-bottom: 1rem; letter-spacing: -.01em;
+}
+.about-body p {
+  font-size: .97rem; line-height: 1.92;
+  font-weight: 300; color: var(--t3); margin-bottom: 1.3rem;
+}
+.about-body p strong { color: var(--t2); font-weight: 500 }
+.about-body p:last-child { margin-bottom: 0 }
+
+/*  GRID CARDS (shared pattern) */
+.grid-board {
+  display: grid; gap: 1px;
+  background: var(--b1);
+  border: 1px solid var(--b1);
+  border-radius: var(--rl); overflow: hidden;
+  margin-top: 3.5rem;
+}
+.col-3 { grid-template-columns: repeat(3,1fr) }
+.col-2 { grid-template-columns: repeat(2,1fr) }
+
+.gcard {
+  background: var(--ink-card);
+  padding: 2.6rem 2.3rem;
+  position: relative; overflow: hidden;
+  transition: background .45s ease;
+}
+.gcard::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--au), transparent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.gcard:hover::before { transform: scaleX(1) }
+.gcard:hover { background: var(--ink-card-h) }
+
+.gcard-num {
+  font-size: .6rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--au); font-weight: 500; margin-bottom: 1.4rem;
+}
+.gcard-icon {
+  width: 1.85rem; height: 1.85rem; color: var(--t3); margin-bottom: 1.3rem;
+  transition: color .4s ease, transform .4s cubic-bezier(.22,1,.36,1);
+}
+.gcard:hover .gcard-icon { color: var(--au); transform: scale(1.12) }
+.gcard h3 {
+  font-family: var(--display);
+  font-size: 1.25rem; font-weight: 500; color: var(--t1);
+  margin-bottom: .6rem;
+  transition: color .3s;
+}
+.gcard:hover h3 { color: var(--au-lt) }
+.gcard p { font-size: .87rem; line-height: 1.76; color: var(--t3); font-weight: 300 }
+
+/* TIMELINE */
+.timeline {
+  max-width: 760px;
+  position: relative;
+}
+.timeline::before {
+  content: ''; position: absolute;
+  left: 0; top: 6px; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, var(--au), rgba(184,150,106,.04));
+}
+.tl-item {
+  position: relative; padding: 0 0 4.2rem 3rem;
+}
+.tl-item:last-child { padding-bottom: 0 }
+.tl-dot {
+  position: absolute; left: -5px; top: 5px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--ink); border: 1.5px solid var(--au);
+  transition: all .35s ease;
+}
+.tl-item:hover .tl-dot {
+  background: var(--au);
+  box-shadow: 0 0 0 5px rgba(184,150,106,.1);
+}
+.tl-label {
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--au); font-weight: 500; margin-bottom: .65rem;
+}
+.tl-item h3 {
+  font-family: var(--display);
+  font-size: 1.42rem; font-weight: 500; color: var(--t1);
+  margin-bottom: .75rem; letter-spacing: -.01em;
+  transition: color .3s;
+}
+.tl-item:hover h3 { color: var(--au-lt) }
+.tl-item p {
+  font-size: .93rem; line-height: 1.85; color: var(--t3); font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════════
+   EXPERIENCE STACK
+═══════════════════════════════════════════════ */
+.exp-stack {
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--b1); border: 1px solid var(--b1);
+  border-radius: var(--rl); overflow: hidden;
+  margin-top: 3.5rem; max-width: 880px;
+}
+.exp-row {
+  background: var(--ink-card); padding: 2.4rem 2.6rem;
+  position: relative; overflow: hidden;
+  transition: background .4s ease;
+}
+.exp-row::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--au);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform .45s cubic-bezier(.22,1,.36,1);
+}
+.exp-row:hover::before { transform: scaleY(1) }
+.exp-row:hover { background: var(--ink-card-h) }
+
+.exp-role {
+  font-family: var(--display);
+  font-size: 1.28rem; font-weight: 500; color: var(--t1);
+  margin-bottom: .3rem; transition: color .3s;
+}
+.exp-row:hover .exp-role { color: var(--au-lt) }
+.exp-meta {
+  font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--au); font-weight: 500; margin-bottom: 1rem;
+}
+.exp-desc { font-size: .91rem; line-height: 1.82; color: var(--t3); font-weight: 300 }
+.exp-tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.1rem }
+.exp-tag {
+  padding: .28rem .82rem;
+  background: var(--au-dim); border: 1px solid var(--au-border);
+  border-radius: 4px; font-size: .65rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--au); font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════
+   VISION / MISSION
+═══════════════════════════════════════════════ */
+.vm-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--b1); border: 1px solid var(--b1);
+  border-radius: var(--rl); overflow: hidden; margin-top: 3.5rem;
+}
+.vm-panel {
+  background: var(--ink-card); padding: 3.8rem 3rem;
+}
+.vm-panel:first-child { border-right: 1px solid var(--b1) }
+.vm-tag {
+  font-size: .62rem; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--au); font-weight: 500; margin-bottom: 1.4rem;
+}
+.vm-panel h3 {
+  font-family: var(--display);
+  font-size: 1.75rem; font-weight: 400; line-height: 1.25;
+  color: var(--t1); margin-bottom: 1.3rem; letter-spacing: -.015em;
+}
+.vm-panel p { font-size: .95rem; line-height: 1.9; color: var(--t3); font-weight: 300 }
+
+/* ═══════════════════════════════════════════════
+   PHILOSOPHY
+═══════════════════════════════════════════════ */
+.phil-center {
+  max-width: 840px; margin: 0 auto; text-align: center;
+}
+.phil-mark {
+  display: block; font-family: var(--display);
+  font-size: 7rem; line-height: .3; color: var(--au); opacity: .18;
+  margin-bottom: 2.2rem; font-weight: 300;
+}
+.phil-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 2.4vw, 1.95rem);
+  font-weight: 400; font-style: italic;
+  line-height: 1.68; color: var(--t2); margin-bottom: 2.2rem;
+}
+.phil-rule {
+  width: 36px; height: 1px; background: var(--au); opacity: .5;
+  margin: 0 auto 1.3rem;
+}
+.phil-attr {
+  font-size: .65rem; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--au); font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════ */
+.contact-grid {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 7rem; margin-top: 4rem; align-items: start;
+}
+.contact-desc {
+  font-size: .97rem; line-height: 1.9; color: var(--t3);
+  font-weight: 300; margin-bottom: 2.6rem; max-width: 440px;
+}
+.email-link {
+  display: inline-flex; align-items: center; gap: .7rem;
+  font-family: var(--display);
+  font-size: 1.4rem; font-weight: 400; color: var(--t1);
+  border-bottom: 1px solid var(--au-border); padding-bottom: .75rem;
+  margin-bottom: 2.5rem; transition: color .3s, border-color .3s;
+}
+.email-link svg { width: 1.1rem; height: 1.1rem; color: var(--au); flex-shrink: 0 }
+.email-link:hover { color: var(--au); border-color: var(--au) }
+
+.contact-btns { display: flex; gap: .85rem }
+
+.soc-header {
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--t4); font-weight: 500; margin-bottom: 1.4rem;
+}
+.soc-list { display: flex; flex-direction: column }
+.soc-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 0; border-bottom: 1px solid var(--b1);
+  font-size: .88rem; color: var(--t3); font-weight: 300;
+  text-decoration: none; cursor: pointer;
+  transition: color .3s ease, padding-left .35s ease;
+}
+.soc-item:last-child { border-bottom: none }
+.soc-item svg { width: .95rem; height: .95rem; color: var(--au); opacity: .6; flex-shrink: 0; transition: opacity .3s }
+.soc-item:hover { color: var(--au); padding-left: .5rem }
+.soc-item:hover svg { opacity: 1 }
+
+/* footer*/
+footer {
+  border-top: 1px solid var(--b1);
+  padding: 2.2rem 0;
+  background: var(--ink);
+}
+.footer-inner {
+  max-width: 1260px; margin: 0 auto; padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy { font-size: .72rem; color: var(--t4); letter-spacing: .04em }
+.footer-links { display: flex; gap: 2rem }
+.footer-links a {
+  font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--t4); cursor: pointer; transition: color .3s;
+}
+.footer-links a:hover { color: var(--au) }
+
+/* responsive */
+@media (max-width: 1060px) {
+  .hero { grid-template-columns: 1fr; min-height: auto }
+  .hero-r { height: 56vw; min-height: 300px; order: -1 }
+  .hero-l { padding: 8rem 2.5rem 4rem; max-width: 100% }
+  .hero-img-grad { background: linear-gradient(to top, var(--ink) 0%, rgba(8,9,13,.4) 100%) }
+  .about-grid { grid-template-columns: 1fr; gap: 3.5rem }
+  .about-aside { position: relative; top: 0; max-width: 300px }
+  .col-3 { grid-template-columns: 1fr 1fr }
+  .vm-grid { grid-template-columns: 1fr }
+  .vm-panel:first-child { border-right: none; border-bottom: 1px solid var(--b1) }
+  .contact-grid { grid-template-columns: 1fr; gap: 3.5rem }
+}
+@media (max-width: 640px) {
+  :root { --sp: 5rem }
+  .nav-menu { display: none }
+  .col-3, .col-2 { grid-template-columns: 1fr }
+  .hero-stats { gap: 2rem }
+  .hero-actions, .contact-btns { flex-wrap: wrap }
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="prog"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo">Azeel <span>Technologies</span></div>
+  <div class="pre-bar"><div class="pre-fill"></div></div>
+  <div class="pre-label">Loading Portfolio</div>
+</div>
+
+<!--nav -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="goto('top')"><em>Azeel</em> Technologies</div>
+    <div class="nav-menu">
+      <span class="nav-link" onclick="goto('about')">About</span>
+      <span class="nav-link" onclick="goto('journey')">Journey</span>
+      <span class="nav-link" onclick="goto('expertise')">Expertise</span>
+      <span class="nav-link" onclick="goto('vision')">Vision</span>
+      <button class="nav-cta" onclick="goto('contact')">Get in Touch</button>
+    </div>
+  </div>
+</nav>
+
+<!-- hero -->
+<section class="hero" id="top">
+  <!-- Left text -->
+  <div class="hero-l">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Founder &amp; CEO · Azeel Technologies</span>
+    </div>
+    <h1 class="hero-name">Alok<br><em>Yadav</em></h1>
+    <p class="hero-role">Technology Entrepreneur &nbsp;·&nbsp; AI &amp; Web Innovator</p>
+    <p class="hero-desc">Building intelligent technology solutions that empower businesses through AI automation, smart software, and creative digital services.</p>
+    <div class="hero-actions">
+      <button class="btn-au" onclick="goto('contact')">Start a Conversation</button>
+      <button class="btn-ghost" onclick="goto('journey')">Explore Journey</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val" data-target="2">0</div>
+        <div class="stat-lbl">Years of experience</div>
+      </div>
+      <div>
+        <div class="stat-val" data-target="10">0</div>
+        <div class="stat-lbl">Projects Delivered</div>
+      </div>
+      <div>
+        <div class="stat-val" data-target="3">0</div>
+        <div class="stat-lbl">Tech Platforms</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right portrait -->
+  <div class="hero-r">
+    <img class="hero-img"
+      src="founder1.jpeg"
+      alt="Alok Yadav — Founder & CEO, Azeel Technologies">
+    <div class="hero-img-grad"></div>
+    <div class="hero-img-fade"></div>
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <span class="badge-txt">B.Tech CSE · IIIT Manipur</span>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span class="scroll-txt">Scroll</span>
+  </div>
+</section>
+
+<!-- about -->
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="sec-label rv">
+      <span class="sec-num">01 — About</span>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="about-grid">
+      <!-- Sticky portrait -->
+      <div class="about-aside rv-l">
+        <img class="about-portrait"
+          src="founder.jpeg"
+          alt="Alok Yadav">
+        <p class="about-caption">Alok Yadav · Founder &amp; CEO</p>
+      </div>
+      <!-- Body text -->
+      <div class="about-body">
+        <h2 class="sec-title rv d1">The Mind Behind<br><em>Azeel</em></h2>
+        <div class="about-pull rv d2">
+          <p>"Technology should solve real problems — not just exist for its own sake."</p>
+        </div>
+        <div class="rv d3">
+          <p>Alok Yadav is a <strong>technology entrepreneur and innovator</strong> currently pursuing a B.Tech in Computer Science and Engineering (2nd Year) at the Indian Institute of Information Technology Senapati, Manipur. Despite being a full-time student, he has demonstrated exceptional commitment to practical learning and professional development.</p>
+          <p>With a strong foundation in computer science and hands-on experience in emerging technologies, Alok combines <strong>academic rigour with real-world problem-solving</strong>. His approach is grounded in delivering practical, scalable solutions that create genuine business value.</p>
+          <p>His passion for innovation led him to establish <strong>Azeel Technologies</strong> — a forward-thinking company dedicated to delivering reliable technology solutions that help businesses thrive in the digital age.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  CREDENTIALS -->
+<section class="sec sec--alt">
+  <div class="wrap">
+    <div class="sec-label rv">
+      <span class="sec-num">02 — Credentials</span>
+      <div class="sec-rule"></div>
+    </div>
+    <h2 class="sec-title rv d1">Education &amp;<br><em>Recognition</em></h2>
+    <div class="grid-board col-3">
+      <div class="gcard rv d2">
+        <div class="gcard-num">01</div>
+        <svg class="gcard-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.44 60.44 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.49a50.702 50.702 0 017.74-3.342"/>
+        </svg>
+        <h3>B.Tech Computer Science</h3>
+        <p>IIIT Senapati, Manipur — 2nd Year. Strong technical expertise in C, C++, Python, Data Structures & Algorithms, Operating Systems, Object-Oriented Programming (OOP), Software Engineering, and Web Development.</p>
+      </div>
+      <div class="gcard rv d3">
+        <div class="gcard-num">02</div>
+        <svg class="gcard-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+        </svg>
+        <h3>Founder &amp; CEO</h3>
+        <p>Established Azeel Technologies to deliver AI automation, modern software, and creative digital services to businesses globally.</p>
+      </div>
+      <div class="gcard rv d4">
+        <div class="gcard-num">03</div>
+        <svg class="gcard-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/>
+        </svg>
+        <h3>Freelance Developer</h3>
+        <p>Delivered high-quality web, AI, and digital solutions to clients across multiple industries while pursuing academic studies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- journy -->
+<section class="sec" id="journey">
+  <div class="wrap">
+    <div class="sec-label rv">
+      <span class="sec-num">03 — Journey</span>
+      <div class="sec-rule"></div>
+    </div>
+    <h2 class="sec-title rv d1" style="margin-bottom:4.5rem">The Path<br><em>Taken</em></h2>
+    <div class="timeline">
+      <div class="tl-item rv d1">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Chapter I</div>
+        <h3>Early Passion for Technology</h3>
+        <p>Began exploring programming during early college years — driven by curiosity and a desire to solve real-world problems. Built foundational knowledge in computer science, algorithms, and software development principles.</p>
+      </div>
+      <div class="tl-item rv d2">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Chapter II</div>
+        <h3>Freelance Development &amp; Consulting</h3>
+        <p>Started freelancing while pursuing studies, working on web development, AI automation, and digital tools. Gained practical experience delivering quality solutions across multiple industries.</p>
+      </div>
+      <div class="tl-item rv d3">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Chapter III</div>
+        <h3>ToolXier Platform Launch</h3>
+        <p>Created ToolXier — a comprehensive suite of web-based tools simplifying everyday digital tasks: image processing, document conversion, and productivity utilities. Demonstrated the ability to identify market needs and ship scalable products.</p>
+      </div>
+      <div class="tl-item rv d4">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Chapter IV</div>
+        <h3>Make The Eve — Technical Expertise</h3>
+        <p>Contributed technical expertise to Make The Eve, a creative entertainment platform. Developed event management systems, media production infrastructure, and online platforms — gaining experience in complex system architecture and team collaboration.</p>
+      </div>
+      <div class="tl-item rv d5">
+        <div class="tl-dot"></div>
+        <div class="tl-label">Chapter V · Present</div>
+        <h3>Azeel Technologies Founded</h3>
+        <p>Established Azeel Technologies to scale impact and deliver comprehensive technology solutions globally — combining years of experience into a cohesive vision for AI automation, software development, and creative digital services.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- skills & experience -->
+<section class="sec sec--alt" id="expertise">
+  <div class="wrap">
+    <div class="sec-label rv">
+      <span class="sec-num">04 — Expertise</span>
+      <div class="sec-rule"></div>
+    </div>
+    <h2 class="sec-title rv d1">Skills &amp;<br><em>Mastery</em></h2>
+    <div class="grid-board col-3">
+      <div class="gcard rv d1">
+        <svg class="gcard-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+        <h3>Web Development</h3>
+        <p>Modern web technologies, responsive design, full-stack architecture</p>
+      </div>
+      <div class="gcard rv d2">
+        <svg class="gcard-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+        <h3>AI Automation</h3>
+        <p>Intelligent automation, ML integration, process optimisation</p>
+      </div>
+      <div class="gcard rv d3">
+        <svg class="gcard-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0H3"/></svg>
+        <h3>Digital Products</h3>
+        <p>Web apps, productivity platforms, scalable digital solutions</p>
+      </div>
+      <div class="gcard rv d4">
+        <svg class="gcard-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
+        <h3>Video Editing</h3>
+        <p>Professional editing, content creation, multimedia storytelling</p>
+      </div>
+      <div class="gcard rv d5">
+        <svg class="gcard-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59"/></svg>
+        <h3>Social Media Managment</h3>
+        <p>Content strategy, digital marketing, brand management</p>
+      </div>
+      <div class="gcard rv d6">
+        <svg class="gcard-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38"/></svg>
+<h3>Google & Meta Ads </h3>
+<p>Campaign strategy, audience targeting, performance optimization, and ROI-focused advertising on Google Ads and Meta platforms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- experience -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-label rv">
+      <span class="sec-num">05 — Experience</span>
+      <div class="sec-rule"></div>
+    </div>
+    <h2 class="sec-title rv d1">Professional<br><em>Experience</em></h2>
+    <div class="exp-stack">
+      <div class="exp-row rv d2">
+        <div class="exp-role">Founder &amp; CEO</div>
+        <div class="exp-meta">Azeel Technologies &nbsp;·&nbsp; Present</div>
+        <p class="exp-desc">Leading a technology company focused on AI automation, modern software development, and creative digital services. Building a team and scaling operations to serve clients globally.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">AI Automation</span>
+          <span class="exp-tag">Web Development</span>
+          <span class="exp-tag">Leadership</span>
+          <span class="exp-tag">Product Strategy</span>
+        </div>
+      </div>
+      <div class="exp-row rv d3">
+        <div class="exp-role">Freelance Developer &amp; Technology Consultant</div>
+        <div class="exp-meta">Multiple Clients &nbsp;·&nbsp; Ongoing</div>
+        <p class="exp-desc">Building responsive, high-performance web applications; implementing intelligent automation for business processes; creating professional multimedia content; advising startups on technology strategy.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Web Development</span>
+          <span class="exp-tag">AI Automation</span>
+          <span class="exp-tag">Video editing</span>
+          <span class="exp-tag">Ads Managment</span>
+        </div>
+      </div>
+
+      <div class="exp-row rv d4">
+  <div class="exp-role">Founder & Developer — ToolXier</div>
+  <div class="exp-meta">ToolXier Platform &nbsp;·&nbsp; Ongoing</div>
+  <p class="exp-desc">
+    Developing and scaling ToolXier, a unified platform providing fast, free, and easy-to-use digital utilities. Focused on building lightweight web tools, optimizing user experience, and creating practical solutions that simplify everyday digital tasks for users worldwide.
+  </p>
+  <div class="exp-tags">
+    <span class="exp-tag">Web Development</span>
+    <span class="exp-tag">Digital Tools</span>
+    <span class="exp-tag">Automation</span>
+    <span class="exp-tag">Product Development</span>
+  </div>
+</div>
+
+      <div class="exp-row rv d5">
+        <div class="exp-role">Technical Contributor</div>
+        <div class="exp-meta">Make The Eve &nbsp;·&nbsp; Previous</div>
+        <p class="exp-desc">Contributed technical expertise developing event platforms, media production systems, and online infrastructure across complex, multi-domain architectures.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Event Platforms</span>
+          <span class="exp-tag">Media Systems</span>
+          <span class="exp-tag">Architecture</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- vision & mission -->
+<section class="sec sec--alt" id="vision">
+  <div class="wrap">
+    <div class="sec-label rv">
+      <span class="sec-num">06 — Direction</span>
+      <div class="sec-rule"></div>
+    </div>
+    <h2 class="sec-title rv d1">Vision &amp;<br><em>Mission</em></h2>
+    <div class="vm-grid">
+      <div class="vm-panel rv-l d2">
+        <div class="vm-tag">Vision</div>
+        <h3>A World Empowered by Intelligent Technology</h3>
+        <p>To build a forward-thinking technology company that empowers businesses through AI automation, smart software, and digital innovation. We envision a world where technology simplifies complexity and unlocks unprecedented opportunities for growth and transformation.</p>
+      </div>
+      <div class="vm-panel rv-r d3">
+        <div class="vm-tag">Mission</div>
+        <h3>Reliable, Scalable, Creative Solutions</h3>
+        <p>To deliver reliable, scalable, and creative technology services that simplify business operations and help organisations grow faster in the digital world. We are committed to being trusted partners in our clients' digital transformation journey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- philosphy -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-label rv">
+      <span class="sec-num">07 — Philosophy</span>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="phil-center rv d2">
+      <span class="phil-mark">"</span>
+      <p class="phil-quote">Success is not just about building great technology — it's about creating meaningful solutions that solve real problems, empower businesses, and drive positive change in the digital world.</p>
+      <div class="phil-rule"></div>
+      <div class="phil-attr">Alok Yadav &nbsp;—&nbsp; Founder &amp; CEO, Azeel Technologies</div>
+    </div>
+  </div>
+</section>
+
+<!-- why trust-->
+<section class="sec sec--alt">
+  <div class="wrap">
+    <div class="sec-label rv">
+      <span class="sec-num">08 — Trust</span>
+      <div class="sec-rule"></div>
+    </div>
+    <h2 class="sec-title rv d1">Why Work With<br><em>Alok Yadav</em></h2>
+    <div class="grid-board col-2">
+      <div class="gcard rv d2">
+        <div class="gcard-num">01</div>
+        <h3>Proven Track Record</h3>
+        <p>Multiple successful projects delivered across different industries. From ToolXier to Make The Eve — a demonstrated ability to execute and deliver real results under real-world conditions.</p>
+      </div>
+      <div class="gcard rv d3">
+        <div class="gcard-num">02</div>
+        <h3>Academic Excellence</h3>
+        <p>Pursuing B.Tech from IIIT Manipur, one of India's premier technology institutes. Strong theoretical foundation paired with aggressive practical application.</p>
+      </div>
+      <div class="gcard rv d4">
+        <div class="gcard-num">03</div>
+        <h3>Practical Experience</h3>
+        <p>Hands-on experience in web development, AI automation, and digital solutions — real-world problem-solving grounded in solid computer science knowledge.</p>
+      </div>
+      <div class="gcard rv d5">
+        <div class="gcard-num">04</div>
+        <h3>Entrepreneurial Vision</h3>
+        <p>Founded Azeel Technologies with a clear, long-term vision. Demonstrates leadership, initiative, and the commitment to excellence that clients can depend on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--contact -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="sec-label rv">
+      <span class="sec-num">09 — Connect</span>
+      <div class="sec-rule"></div>
+    </div>
+    <h2 class="sec-title rv d1">Let's Build<br><em>Something</em></h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-desc rv d2">Interested in discussing technology solutions, exploring collaboration opportunities, or simply connecting? I’d be delighted to hear from you. Feel free to reach out, and let’s discover how we can create impactful possibilities together.</p>
+        <a href="mailto:work.alokyadav@gmail.com" class="email-link rv d3">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          work.alokyadav@gmail.com
+        </a>
+        <div class="contact-btns rv d4">
+          <button class="btn-au" onclick="window.location.href='mailto:alokkumar11445@gmail.com'">Send Email</button>
+          <button class="btn-ghost" onclick="goto('about')">Learn More</button>
+        </div>
+      </div>
+      <div class="rv-r d3">
+        <p class="soc-header">Connect Online</p>
+        <div class="soc-list">
+          <a href="https://linkedin.com/in/alokxyadav" target="_blank" rel="noopener" class="soc-item">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn — Professional Network
+          </a>
+          <a href="https://github.com/alok-yadavx" target="_blank" rel="noopener" class="soc-item">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub — Code &amp; Projects
+          </a>
+          <a href="https://instagram.com/alokx.yadav/" target="_blank" rel="noopener" class="soc-item">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Connect on Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Alok Yadav · Azeel Technologies. All rights reserved.</span>
+    <div class="footer-links">
+      <a>Privacy</a>
+      <a>Terms</a>
+      <a onclick="goto('top')">Back to Top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+/* Preloader */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('preloader').classList.add('done'), 4300);
+});
+
+/* Scroll progress */
+const prog = document.getElementById('prog');
+const onScroll = () => {
+  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  prog.style.width = pct + '%';
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* Nav */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('stuck', window.scrollY > 60), { passive: true });
+
+/* Smooth scroll */
+function goto(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* Intersection Observer — scroll reveals */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on') });
+}, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+document.querySelectorAll('.rv, .rv-l, .rv-r').forEach(el => revObs.observe(el));
+
+/* Counter animation — fires once visible */
+function countUp(el, target, duration = 1800) {
+  let startTime = null;
+  const step = (timestamp) => {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(ease * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target + '+';
+  };
+  requestAnimationFrame(step);
+}
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      countUp(e.target, parseInt(e.target.dataset.target));
+      cntObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('[data-target]').forEach(el => cntObs.observe(el));
+</script>
+</body>
+</html>
